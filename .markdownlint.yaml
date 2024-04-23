@@ -1,6 +1,7 @@
 ---
 # Disable checks here
 MD013: false
+MD041: false
 
 # Disable checks that conflict with Prettier
 blanks-around-fences: false
