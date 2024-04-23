@@ -1,6 +1,6 @@
 """Tests for the main module."""
 
-from myproject import __version__
+from rse_report_generator import __version__
 
 
 def test_version():
