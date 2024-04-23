@@ -1,4 +1,4 @@
-"""Unit tests for MyProject."""
+"""Unit tests for RSE report generator."""
 
 from logging import getLogger
 

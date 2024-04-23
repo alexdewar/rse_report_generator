@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "MyProject"
+name = "rse_report_generator"
 version = "0.1.0"
-description = ""
-authors = ["Jane Doe <jane_doe@some_email.com>"]
+description = "RSE report generator: A tool to generate progress reports for RSE software projects"
+authors = ["Alex Dewar <a.dewar@imperial.ac.uk>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -28,7 +28,7 @@ module = "tests.*"
 disallow_untyped_defs = false
 
 [tool.pytest.ini_options]
-addopts = "-v --mypy -p no:warnings --cov=myproject --cov-report=html --doctest-modules --ignore=myproject/__main__.py"
+addopts = "-v --mypy -p no:warnings --cov=rse_report_generator --cov-report=html --doctest-modules --ignore=rse_report_generator/__main__.py"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
