@@ -2,10 +2,7 @@
 
 from typing import TextIO
 
-from githubkit import GitHub, UnauthAuthStrategy
-
-github = GitHub()
-github = GitHub(UnauthAuthStrategy())
+from .gh_cli import get_project_id
 
 
 def get_repo_from_name(name: str) -> tuple[str, str]:
@@ -17,10 +14,8 @@ def get_repo_from_name(name: str) -> tuple[str, str]:
     return owner, repo
 
 
-async def generate_report(repo_name: str, fd: TextIO) -> None:
+async def generate_report(repo_name: str, project_name: str, fd: TextIO) -> None:
     """Generate a report and write to specified file."""
     owner, repo = get_repo_from_name(repo_name)
-    async for pr in github.paginate(
-        github.rest.pulls.async_list, owner=owner, repo=repo, state="closed"
-    ):
-        print(f"{pr.number}: {pr.title}", file=fd)
+    project_id = await get_project_id(owner, project_name)
+    print(project_id)

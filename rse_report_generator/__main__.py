@@ -8,10 +8,10 @@ from .report import generate_report
 
 async def main() -> None:
     """Main entry point for program."""
-    if len(sys.argv) != 2:
-        raise RuntimeError("Repo name must be provided")
+    if len(sys.argv) != 3:
+        raise RuntimeError("Repo name and project name must be provided")
 
-    await generate_report(sys.argv[1], sys.stdout)
+    await generate_report(sys.argv[1], sys.argv[2], sys.stdout)
 
 
 if __name__ == "__main__":
