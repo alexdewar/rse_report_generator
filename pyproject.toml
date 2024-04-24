@@ -8,6 +8,7 @@ authors = ["Alex Dewar <a.dewar@imperial.ac.uk>"]
 python = "^3.11"
 githubkit = "^0.11.4"
 pyyaml = "^6.0.1"
+dateparser = "^1.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^8.2"
@@ -19,6 +20,7 @@ ruff = "^0.4.3"
 
 [tool.poetry.group.dev.dependencies]
 types-pyyaml = "^6.0.12.20240311"
+types-dateparser = "^1.2.0.20240420"
 
 [tool.mypy]
 disallow_any_explicit = true
