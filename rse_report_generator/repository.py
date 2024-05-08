@@ -32,7 +32,7 @@ class Repository:
         self._owner, self._repo = _get_repo_from_name(repo_name)
 
     async def get_merged_pull_requests(
-        self, from_date: datetime, to_date: datetime
+        self, from_date: datetime, to_date: datetime, ignore_bots: bool = False
     ) -> AsyncIterable[PullRequestSimple]:
         """Get all PRs merged within the given date range."""
         async for pr in self._github.paginate(
@@ -41,6 +41,8 @@ class Repository:
             repo=self._repo,
             state="closed",
         ):
+            if ignore_bots and pr.user.type == "Bot":
+                continue
             if pr.merged_at and from_date <= pr.merged_at < to_date:
                 yield pr
 

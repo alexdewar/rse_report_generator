@@ -2,7 +2,7 @@
 
 ## Merged pull requests
 
-%% for pr in repo.get_merged_pull_requests(from_date, to_date)
+%% for pr in repo.get_merged_pull_requests(from_date, to_date, ignore_bots=True)
 - {{ pr.title }} by [\@{{ pr.user.login }}]({{ pr.user.html_url }}) in [\#{{ pr.number }}]({{ pr.html_url }})
 {% endfor %}
 ## Closed issues
