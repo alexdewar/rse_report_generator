@@ -4,4 +4,9 @@
 
 %% for pr in repo.get_merged_pull_requests(from_date, to_date)
 - {{ pr.number }}: {{ pr.title }}
-%% endfor
+{% endfor %}
+## Closed issues
+
+%% for issue in repo.get_closed_issues(from_date, to_date)
+- {{ issue.number }}: {{ issue.title }}
+{% endfor %}

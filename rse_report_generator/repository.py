@@ -6,7 +6,7 @@ from datetime import datetime
 from githubkit import (
     GitHub,
 )
-from githubkit.versions.latest.models import PullRequestSimple
+from githubkit.versions.latest.models import Issue, PullRequestSimple
 
 
 def _get_repo_from_name(name: str) -> tuple[str, str]:
@@ -43,3 +43,21 @@ class Repository:
         ):
             if pr.merged_at and from_date <= pr.merged_at < to_date:
                 yield pr
+
+    async def get_closed_issues(
+        self, from_date: datetime, to_date: datetime
+    ) -> AsyncIterable[Issue]:
+        """Get all issues closed within the given date range."""
+        async for issue in self._github.paginate(
+            self._github.rest.issues.async_list_for_repo,
+            owner=self._owner,
+            repo=self._repo,
+            state="closed",
+            since=from_date,
+        ):
+            if (
+                not issue.pull_request
+                and issue.closed_at
+                and from_date <= issue.closed_at < to_date
+            ):
+                yield issue
