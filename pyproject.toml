@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "RSE report generator: A tool to generate progress reports for RSE software projects"
 authors = ["Alex Dewar <a.dewar@imperial.ac.uk>"]
 
+[tool.poetry.scripts]
+rse-report-generator = "rse_report_generator.__main__:main"
+
 [tool.poetry.dependencies]
 python = "^3.11"
 githubkit = "^0.11.4"

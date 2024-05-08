@@ -25,8 +25,8 @@ def _open_file(path: str) -> TextIO:
     return open(path, "w")
 
 
-async def main() -> None:
-    """Main entry point for program."""
+async def async_main() -> None:
+    """Main entry point for program (asynchronous)."""
     parser = ArgumentParser(
         "RSE report generator", "A tool to automatically generate reports for projects"
     )
@@ -40,5 +40,10 @@ async def main() -> None:
         await generate_report(args.repo, args.from_date, args.to_date, file)
 
 
+def main() -> None:
+    """Main entry point for program."""
+    asyncio.run(async_main())
+
+
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
