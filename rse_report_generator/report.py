@@ -4,7 +4,6 @@ from typing import TextIO
 
 from githubkit import GitHub, UnauthAuthStrategy
 
-github = GitHub()
 github = GitHub(UnauthAuthStrategy())
 
 
