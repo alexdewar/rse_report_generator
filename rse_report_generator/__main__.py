@@ -2,7 +2,9 @@
 
 import asyncio
 import sys
+from argparse import ArgumentParser
 from datetime import datetime
+from typing import TextIO
 
 from dateparser import parse
 
@@ -16,15 +18,26 @@ def _get_date(date_str: str) -> datetime:
     raise ValueError(f"{date_str} is not a valid date string")
 
 
+def _open_file(path: str) -> TextIO:
+    if path == "-":
+        return sys.stdout
+
+    return open(path, "w")
+
+
 async def main() -> None:
     """Main entry point for program."""
-    repo_name = sys.argv[1]
-    from_date = _get_date(sys.argv[2])
-    to_date = (
-        _get_date(sys.argv[3]) if len(sys.argv) >= 4 else datetime.now().astimezone()
+    parser = ArgumentParser(
+        "RSE report generator", "A tool to automatically generate reports for projects"
     )
+    parser.add_argument("repo")
+    parser.add_argument("-f", "--from-date", default="one month ago", type=_get_date)
+    parser.add_argument("-t", "--to-date", default="now", type=_get_date)
+    parser.add_argument("-o", "--output", default="-")
 
-    await generate_report(repo_name, from_date, to_date, sys.stdout)
+    args = parser.parse_args()
+    with _open_file(args.output) as file:
+        await generate_report(args.repo, args.from_date, args.to_date, file)
 
 
 if __name__ == "__main__":

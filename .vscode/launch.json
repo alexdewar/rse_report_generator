@@ -9,7 +9,7 @@
             "type": "debugpy",
             "request": "launch",
             "module": "rse_report_generator",
-            "args": ["ImperialCollegeLondon/FINESSE", "one month ago"]
+            "args": ["ImperialCollegeLondon/FINESSE"]
         }
     ]
 }
