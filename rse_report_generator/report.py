@@ -9,6 +9,7 @@ from githubkit import (
     TokenAuthStrategy,
     UnauthAuthStrategy,
 )
+from jinja2 import Environment, PackageLoader, select_autoescape
 
 from .gh_cli import get_github_token
 from .repository import Repository
@@ -27,11 +28,15 @@ async def generate_report(
     """Generate a report and write to specified file."""
     github = GitHub(await _get_auth_strategy())
     repo = Repository(github, repo_name)
-
-    print(
-        f"# Report for {repo_name} ({from_date.date()} to {to_date.date()})\n", file=fd
+    env = Environment(
+        loader=PackageLoader("rse_report_generator"),
+        autoescape=select_autoescape(),
+        enable_async=True,
+        keep_trailing_newline=True,
+        line_statement_prefix="%%",
     )
-
-    print("## Merged pull requests\n", file=fd)
-    async for pr in repo.get_merged_pull_requests(from_date, to_date):
-        print(f"- {pr.number}: {pr.title}", file=fd)
+    template = env.get_template("report.md.jinja")
+    async for chunk in template.generate_async(
+        repo_name=repo_name, from_date=from_date, to_date=to_date, repo=repo
+    ):
+        fd.write(chunk)

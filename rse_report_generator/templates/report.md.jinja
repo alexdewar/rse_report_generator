@@ -1,0 +1,7 @@
+# Report for {{ repo_name}} ({{ from_date.date() }} to {{ to_date.date()}})
+
+## Merged pull requests
+
+%% for pr in repo.get_merged_pull_requests(from_date, to_date)
+- {{ pr.number }}: {{ pr.title }}
+%% endfor
