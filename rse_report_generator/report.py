@@ -1,26 +1,42 @@
 """Module for generating report."""
 
+from datetime import datetime
 from typing import TextIO
 
-from githubkit import GitHub, UnauthAuthStrategy
+from githubkit import (
+    BaseAuthStrategy,
+    GitHub,
+    TokenAuthStrategy,
+    UnauthAuthStrategy,
+)
+from jinja2 import Environment, PackageLoader, select_autoescape
 
-github = GitHub()
-github = GitHub(UnauthAuthStrategy())
-
-
-def get_repo_from_name(name: str) -> tuple[str, str]:
-    """Get a repository from a string name."""
-    owner, sep, repo = name.partition("/")
-    if not sep:
-        raise ValueError("Repository name must be in the form org/repo")
-
-    return owner, repo
+from .gh_cli import get_github_token
+from .repository import Repository
 
 
-async def generate_report(repo_name: str, fd: TextIO) -> None:
+async def _get_auth_strategy() -> BaseAuthStrategy:
+    if token := await get_github_token():
+        return TokenAuthStrategy(token)
+
+    return UnauthAuthStrategy()
+
+
+async def generate_report(
+    repo_name: str, from_date: datetime, to_date: datetime, fd: TextIO
+) -> None:
     """Generate a report and write to specified file."""
-    owner, repo = get_repo_from_name(repo_name)
-    async for pr in github.paginate(
-        github.rest.pulls.async_list, owner=owner, repo=repo, state="closed"
+    github = GitHub(await _get_auth_strategy())
+    repo = Repository(github, repo_name)
+    env = Environment(
+        loader=PackageLoader("rse_report_generator"),
+        autoescape=select_autoescape(),
+        enable_async=True,
+        keep_trailing_newline=True,
+        line_statement_prefix="%%",
+    )
+    template = env.get_template("report.md.jinja")
+    async for chunk in template.generate_async(
+        repo_name=repo_name, from_date=from_date, to_date=to_date, repo=repo
     ):
-        print(f"{pr.number}: {pr.title}", file=fd)
+        fd.write(chunk)

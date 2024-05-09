@@ -1,0 +1,12 @@
+# Report for {{ repo_name}} ({{ from_date.date() }} to {{ to_date.date()}})
+
+## Merged pull requests
+
+%% for pr in repo.get_merged_pull_requests(from_date, to_date, ignore_bots=True)
+- {{ pr.title }} by [\@{{ pr.user.login }}]({{ pr.user.html_url }}) in [\#{{ pr.number }}]({{ pr.html_url }})
+{% endfor %}
+## Closed issues
+
+%% for issue in repo.get_closed_issues(from_date, to_date)
+- {{ issue.title }} ([\#{{ issue.number }}]({{ issue.html_url }}))
+{% endfor %}
