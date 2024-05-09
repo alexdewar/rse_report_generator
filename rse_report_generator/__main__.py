@@ -23,7 +23,7 @@ def _open_file(path: str) -> TextIO:
     if path == "-":
         return sys.stdout
 
-    return open(path, "w")
+    return open(path, "w", encoding="utf8")
 
 
 async def async_main() -> None:
