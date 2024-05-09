@@ -8,6 +8,7 @@ from typing import TextIO
 
 from dateparser import parse
 
+from . import config
 from .report import generate_report
 
 
@@ -28,12 +29,24 @@ def _open_file(path: str) -> TextIO:
 async def async_main() -> None:
     """Main entry point for program (asynchronous)."""
     parser = ArgumentParser(
-        "RSE report generator", "A tool to automatically generate reports for projects"
+        config.PROG_NAME,
+        description=config.APP_DESCRIPTION,
+        epilog=config.APP_DESCRIPTION_EPILOG,
     )
-    parser.add_argument("repo")
-    parser.add_argument("-f", "--from-date", default="one month ago", type=_get_date)
-    parser.add_argument("-t", "--to-date", default="now", type=_get_date)
-    parser.add_argument("-o", "--output", default="-")
+    parser.add_argument("repo", help="Name of repository in the form owner/repo")
+    parser.add_argument(
+        "-f",
+        "--from-date",
+        default="one month ago",
+        type=_get_date,
+        help="Start of report period",
+    )
+    parser.add_argument(
+        "-t", "--to-date", default="now", type=_get_date, help="End of report period"
+    )
+    parser.add_argument(
+        "-o", "--output", default="-", help='Output file (use "-" for stdout)'
+    )
 
     args = parser.parse_args()
     with _open_file(args.output) as file:

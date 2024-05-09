@@ -11,6 +11,7 @@ from githubkit import (
 )
 from jinja2 import Environment, PackageLoader, select_autoescape
 
+from .config import PACKAGE_NAME
 from .gh_cli import get_github_token
 from .repository import Repository
 
@@ -29,7 +30,7 @@ async def generate_report(
     github = GitHub(await _get_auth_strategy())
     repo = Repository(github, repo_name)
     env = Environment(
-        loader=PackageLoader("rse_report_generator"),
+        loader=PackageLoader(PACKAGE_NAME),
         autoescape=select_autoescape(),
         enable_async=True,
         keep_trailing_newline=True,
