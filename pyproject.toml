@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "rse_report_generator"
+name = "rse-report-generator"
 version = "0.1.0"
-description = "RSE report generator: A tool to generate progress reports for RSE software projects"
+description = "A tool to generate progress reports for RSE software projects"
 authors = ["Alex Dewar <a.dewar@imperial.ac.uk>"]
 
 [tool.poetry.scripts]
