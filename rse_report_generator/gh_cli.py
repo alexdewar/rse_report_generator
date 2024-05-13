@@ -20,6 +20,6 @@ async def get_github_token() -> str | None:
     """Get the auth token being used by gh."""
     try:
         return (await _run_gh_command("auth", "token")).strip()
-    except RuntimeError as e:
-        logging.warn(str(e))
+    except Exception:
+        logging.warn("Failed to run gh command-line program")
         return None
