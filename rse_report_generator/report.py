@@ -12,8 +12,8 @@ from githubkit import (
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from .config import PACKAGE_NAME
-from .gh_cli import get_github_token
 from .repository import Repository
+from .token import get_github_token
 
 
 async def _get_auth_strategy() -> BaseAuthStrategy:
