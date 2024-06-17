@@ -179,13 +179,13 @@ typing = ["typing-extensions (>=4.8)"]
 
 [[package]]
 name = "githubkit"
-version = "0.11.4"
+version = "0.11.6"
 description = "GitHub SDK for Python"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "githubkit-0.11.4-py3-none-any.whl", hash = "sha256:281af76e9ec24a1f3dc1c99ed4e50785898220d47f84acb2f87be8d7a572769a"},
-    {file = "githubkit-0.11.4.tar.gz", hash = "sha256:e629d833f98157cb4b1c14b69fdb54f7f960fb0da6906f1fa30fca14c347c0d4"},
+    {file = "githubkit-0.11.6-py3-none-any.whl", hash = "sha256:3b0918c19f1ad675a4a19e295c00520e3eb967d5a29562f45d30737fe337a328"},
+    {file = "githubkit-0.11.6.tar.gz", hash = "sha256:a520492190124a7852365a73771d1e2661bb4edc16da00f7f65b5e1ddb7c7b68"},
 ]
 
 [package.dependencies]
@@ -960,4 +960,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<4.0"
-content-hash = "580040b717cbbd69e8e9d792fcbbed03dda66fd852c1c9cf6045212e2022e54d"
+content-hash = "794c4a8edf72b6d3d19d2e0aaa8d62f0913611ba6c651eb75ee131684963e635"

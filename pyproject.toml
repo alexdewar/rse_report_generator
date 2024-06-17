@@ -9,7 +9,7 @@ rse-report-generator = "rse_report_generator.__main__:main"
 
 [tool.poetry.dependencies]
 python = ">=3.11,<4.0"
-githubkit = "^0.11.4"
+githubkit = "^0.11.6"
 pyyaml = "^6.0.1"
 dateparser = "^1.2.0"
 jinja2 = "^3.1.4"
