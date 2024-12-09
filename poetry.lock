@@ -179,26 +179,26 @@ typing = ["typing-extensions (>=4.8)"]
 
 [[package]]
 name = "githubkit"
-version = "0.11.13"
+version = "0.12.1"
 description = "GitHub SDK for Python"
 optional = false
-python-versions = "<4.0,>=3.8"
+python-versions = "<4.0,>=3.9"
 files = [
-    {file = "githubkit-0.11.13-py3-none-any.whl", hash = "sha256:a1d52ed31cbcebaba7c6b2d6ba54b316ca00cbca6c2429ec88715a263a7c2fdc"},
-    {file = "githubkit-0.11.13.tar.gz", hash = "sha256:0d17ab5bffe98ba521fabd570c39be5d0301b9d3bf8508a89a6cd0bbc080d542"},
+    {file = "githubkit-0.12.1-py3-none-any.whl", hash = "sha256:bfbd46e37fa9ae83e0014d72e3c27fbb838520039198ccec8a84bd398b81bf4c"},
+    {file = "githubkit-0.12.1.tar.gz", hash = "sha256:c8482a85786a508dcf05852a8c58b116ffacb9c94d28e94a72bcfc279169a171"},
 ]
 
 [package.dependencies]
-hishel = ">=0.0.21,<=0.0.33"
+anyio = ">=3.6.1,<5.0.0"
+hishel = ">=0.0.21,<=0.2.0"
 httpx = ">=0.23.0,<1.0.0"
 pydantic = ">=1.9.1,<2.5.0 || >2.5.0,<2.5.1 || >2.5.1,<3.0.0"
-typing-extensions = ">=4.3.0,<5.0.0"
+typing-extensions = ">=4.11.0,<5.0.0"
 
 [package.extras]
-all = ["PyJWT[crypto] (>=2.4.0,<3.0.0)", "anyio (>=3.6.1,<5.0.0)"]
-auth = ["PyJWT[crypto] (>=2.4.0,<3.0.0)", "anyio (>=3.6.1,<5.0.0)"]
+all = ["PyJWT[crypto] (>=2.4.0,<3.0.0)"]
+auth = ["PyJWT[crypto] (>=2.4.0,<3.0.0)"]
 auth-app = ["PyJWT[crypto] (>=2.4.0,<3.0.0)"]
-auth-oauth-device = ["anyio (>=3.6.1,<5.0.0)"]
 jwt = ["PyJWT[crypto] (>=2.4.0,<3.0.0)"]
 
 [[package]]
@@ -963,4 +963,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<4.0"
-content-hash = "4cd9b52636a2649b9cfd18f795f864c4e89bae8592e85adea7f1bad4e4354d14"
+content-hash = "568468b2d9561d24f8fc1d9187e30d4a74e10022062b923d342b5115419d1d64"
