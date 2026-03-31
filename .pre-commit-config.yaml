@@ -31,3 +31,5 @@ repos:
     rev: v0.42.0
     hooks:
       - id: markdownlint-fix
+ci:
+  autoupdate_schedule: never
